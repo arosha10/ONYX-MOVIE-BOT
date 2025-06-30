@@ -60,7 +60,7 @@ async function connectToWA() {
 
   //===========================
 
-  console.log("Connecting 🌀ONYX MD🔥BOT👾...");
+  console.log("Connecting 🌀ONYX MOVIE🎞BOT👾...");
   const { state, saveCreds } = await useMultiFileAuthState(
     __dirname + "/auth_info_baileys/"
   );
@@ -91,21 +91,21 @@ async function connectToWA() {
           require("./plugins/" + plugin);
         }
       });
-      console.log("🌀ONYX MD🔥BOT👾 installed successful ✅");
-      console.log("🌀ONYX MD🔥BOT👾 connected to whatsapp ✅");
+      console.log("🌀ONYX MOVIE🎞BOT👾 installed successful ✅");
+      console.log("🌀ONYX MOVIE🎞BOT👾 connected to whatsapp ✅");
 
-      let up = `*🌀ONYX MD🔥BOT👾 connected successful ✅*\n\n𝙾𝚗𝚢𝚡 𝙼𝚍 𝚒𝚜 𝚊 𝚋𝚘𝚝 𝚝𝚑𝚊𝚝 𝚠𝚘𝚛𝚔𝚜 𝚘𝚗 𝚆𝚑𝚊𝚝𝚜𝚊𝚙𝚙 𝚌𝚛𝚎𝚊𝚝𝚎𝚍 𝚋𝚢 𝙰𝚛𝚘𝚜𝚑 𝚂𝚊𝚖𝚞𝚍𝚒𝚝𝚑𝚊! 𝚈𝚘𝚞 𝚌𝚊𝚗 𝚐𝚎𝚝 𝚖𝚊𝚗𝚢 𝚋𝚎𝚗𝚎𝚏𝚒𝚝𝚜 𝚏𝚛𝚘𝚖 𝚝𝚑𝚒𝚜 🤑\n\n*✅ Github repository = https://github.com/aroshsamuditha/ONYX-MD*\n*✅ Web Site =*\n*✅Youtube =*\n*✅ Tiktok Page = https://www.tiktok.com/@onyxstudio_byarosh?_t=ZS-8xQGlXXfj3o&_r=1*\n\n> By Arosh Samuditha`;
+      let up = `*🌀ONYX MOVIE🎞BOT👾 connected successful ✅*\n\n With this ONYX MOVIE DOWNLOADER BOT you can download movies via Whatsapp 🔥▶\n> මේ ONYX MOVIE DOWNLOADER BOT මගින් ඔබට Whatsapp හරහා Movie Download කර ගැනීමෙ හැකියාව ඇත 🔥▶\n> இந்த ONYX MOVIE DOWNLOADER BOT மூலம் நீங்கள் Whatsapp வழியாக திரைப்படங்களை பதிவிறக்கம் செய்யலாம் 🔥▶\n\n✅ Github repository = https://github.com/aroshsamuditha/ONYX-MOVIE-BOT\n✅Youtube = https://www.youtube.com/@ONYXSTUDIO2005\n✅ Tiktok Page = https://www.tiktok.com/@onyxstudio_byarosh?_t=ZS-8xQGlXXfj3o&_r=1\n\n> By Arosh Samuditha`;
       let up1 = `*※ Hello Arosh, I made bot successful 🖤✅*`;
 
       robin.sendMessage(ownerNumber + "@s.whatsapp.net", {
         image: {
-          url: `https://raw.githubusercontent.com/aroshsamuditha/ONYX-MEDIA/refs/heads/main/oNYX%20bOT.jpg`,
+          url: `https://github.com/aroshsamuditha/ONYX-MEDIA/blob/main/IMG/MOVIE%20BOT.jpg`,
         },
         caption: up,
       });
       robin.sendMessage("94761676948@s.whatsapp.net", {
         image: {
-          url: `https://raw.githubusercontent.com/aroshsamuditha/ONYX-MEDIA/refs/heads/main/oNYX%20bOT.jpg`,
+          url: `https://github.com/aroshsamuditha/ONYX-MEDIA/blob/main/IMG/MOVIE%20BOT.jpg`,
         },
         caption: up1,
       });
@@ -408,7 +408,7 @@ if (
   });
 }
 app.get("/", (req, res) => {
-  res.send("hey, 🌀ONYX MD🔥BOT👾 started✅");
+  res.send("hey, 🌀ONYX MOVIE🎞BOT👾 started✅");
 });
 app.listen(port, () =>
   console.log(`Server listening on port http://localhost:${port}`)
