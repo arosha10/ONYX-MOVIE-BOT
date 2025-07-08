@@ -18,7 +18,7 @@ module.exports = async function (robin, groupId, newMembers) {
 
     for (const member of newMembers) {
       // Custom welcome message
-      const caption = `👋😍 *WELCOME TO ${groupName}!*\n@${member.split("@")[0]} 👻,\n ∧,,,∧\n(  ̳• · • ̳)\n /    づ♡ I love you\n\nwe are glad to have you here!\n\n*Please be sure to follow the rules of the group you are in!*\n------------------------------------\n> Also, a 🤖bot has been installed for group administration, so please refrain from sharing obscene material or sharing other group links😾🖐\n\n> *🌀ONYX MD🔥BOT👾BY AROSH*`;
+      const caption = `👋😍 *WELCOME TO ${groupName}!*\n@${member.split("@")[0]} 👻,\n ∧,,,∧\n(  ̳• · • ̳)\n /    づ♡ I love you\n\nwe are glad to have you here!\n\n*ඔයා Movie Bot ට අලුත් කෙනෙක්ද?*\n\nමෙන්න මේ විදිහට තමා Movie Download කරගන්නෙ 👇\n\n1️⃣ ඔයාට ඕන කරන movie එකේ නම *.movie movie එකේ නම* මේ විදිහට type කරන්න.\n\n*උදාහරණ = .movie harry potter*\n\nඑතකොට ඔයාට titles එක්ක massage එකක් එයි\n\n2️⃣ දැන් ඔයාට ගන්න ඔන movie එකේ title එක ඉස්සරහ තියන අංකය .moviepick <number> මේ විදිහට type කරල send කරන්න \n*උදාහරණ = .movie 1*\n\n🌟දැන් විනාඩියක් වගේ ඇතුලත ඔයාගෙ movie එක Download වෙයි✅⚡\n\n> *🌀ONYX MD🔥BOT👾BY AROSH*`;
 
       // Send image with caption
       await robin.sendMessage(groupId, {
