@@ -57,33 +57,49 @@ const port = process.env.PORT || 8000;
 //=============================================
 
 async function connectToWA() {
+  let retryCount = 0;
+  const maxRetries = 5;
 
   //===========================
 
-  console.log("Connecting 🌀ONYX MOVIE🎞BOT👾...");
-  const { state, saveCreds } = await useMultiFileAuthState(
-    __dirname + "/auth_info_baileys/"
-  );
-  var { version } = await fetchLatestBaileysVersion();
+  console.log("Connecting 🌀ONYX MD🔥BOT👾...");
+  
+  try {
+    const { state, saveCreds } = await useMultiFileAuthState(
+      __dirname + "/auth_info_baileys/"
+    );
+    var { version } = await fetchLatestBaileysVersion();
 
-  const robin = makeWASocket({
-    logger: P({ level: "silent" }),
-    printQRInTerminal: false,
-    browser: Browsers.macOS("Firefox"),
-    syncFullHistory: true,
-    auth: state,
-    version,
-  });
+    const robin = makeWASocket({
+      logger: P({ level: "silent" }),
+      printQRInTerminal: false,
+      browser: Browsers.macOS("Firefox"),
+      syncFullHistory: true,
+      auth: state,
+      version,
+      connectTimeoutMs: 60000, // 60 seconds timeout
+      defaultQueryTimeoutMs: 30000, // 30 seconds for queries
+      retryRequestDelayMs: 2000, // 2 seconds delay between retries
+    });
 
-  robin.ev.on("connection.update", (update) => {
-    const { connection, lastDisconnect } = update;
-    if (connection === "close") {
-      if (
-        lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut
-      ) {
-        connectToWA();
-      }
-    } else if (connection === "open") {
+      robin.ev.on("connection.update", (update) => {
+      const { connection, lastDisconnect } = update;
+      if (connection === "close") {
+        if (
+          lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut
+        ) {
+          console.log("Connection closed, attempting to reconnect...");
+          setTimeout(() => {
+            if (retryCount < maxRetries) {
+              retryCount++;
+              console.log(`Reconnection attempt ${retryCount}/${maxRetries}`);
+              connectToWA();
+            } else {
+              console.log("Max retry attempts reached. Please check your connection.");
+            }
+          }, 5000);
+        }
+      } else if (connection === "open") {
       console.log(" Installing... ");
       const path = require("path");
       fs.readdirSync("./plugins/").forEach((plugin) => {
@@ -91,21 +107,21 @@ async function connectToWA() {
           require("./plugins/" + plugin);
         }
       });
-      console.log("🌀ONYX MOVIE🎞BOT👾 installed successful ✅");
-      console.log("🌀ONYX MOVIE🎞BOT👾 connected to whatsapp ✅");
+      console.log("🌀ONYX MD🔥BOT👾 installed successful ✅");
+      console.log("🌀ONYX MD🔥BOT👾 connected to whatsapp ✅");
 
-      let up = `*🌀ONYX MOVIE🎞BOT👾 connected successful ✅*\n\n With this ONYX MOVIE DOWNLOADER BOT you can download movies via Whatsapp 🔥▶\n> මේ ONYX MOVIE DOWNLOADER BOT මගින් ඔබට Whatsapp හරහා Movie Download කර ගැනීමෙ හැකියාව ඇත 🔥▶\n> இந்த ONYX MOVIE DOWNLOADER BOT மூலம் நீங்கள் Whatsapp வழியாக திரைப்படங்களை பதிவிறக்கம் செய்யலாம் 🔥▶\n\n✅ Github repository = https://github.com/aroshsamuditha/ONYX-MOVIE-BOT\n✅Youtube = https://www.youtube.com/@ONYXSTUDIO2005\n✅ Tiktok Page = https://www.tiktok.com/@onyxstudio_byarosh?_t=ZS-8xQGlXXfj3o&_r=1\n\n> By Arosh Samuditha`;
+      let up = `*🌀ONYX MD🔥BOT👾 connected successful ✅*\n\n𝙾𝚗𝚢𝚡 𝙼𝚍 𝚒𝚜 𝚊 𝚋𝚘𝚝 𝚝𝚑𝚊𝚝 𝚠𝚘𝚛𝚔𝚜 𝚘𝚗 𝚆𝚑𝚊𝚝𝚜𝚊𝚙𝚙 𝚌𝚛𝚎𝚊𝚝𝚎𝚍 𝚋𝚢 𝙰𝚛𝚘𝚜𝚑 𝚂𝚊𝚖𝚞𝚍𝚒𝚝𝚑𝚊! 𝚈𝚘𝚞 𝚌𝚊𝚗 𝚐𝚎𝚝 𝚖𝚊𝚗𝚢 𝚋𝚎𝚗𝚎𝚏𝚒𝚝𝚜 𝚏𝚛𝚘𝚖 𝚝𝚑𝚒𝚜 🤑\n\n*✅ Github repository = https://github.com/aroshsamuditha/ONYX-MD*\n*✅ Web Site =*\n*✅Youtube =*\n*✅ Tiktok Page = https://www.tiktok.com/@onyxstudio_byarosh?_t=ZS-8xQGlXXfj3o&_r=1*\n\n> By Arosh Samuditha`;
       let up1 = `*※ Hello Arosh, I made bot successful 🖤✅*`;
 
       robin.sendMessage(ownerNumber + "@s.whatsapp.net", {
         image: {
-          url: `https://github.com/aroshsamuditha/ONYX-MEDIA/blob/main/IMG/MOVIE%20BOT.jpg`,
+          url: `https://raw.githubusercontent.com/aroshsamuditha/ONYX-MEDIA/refs/heads/main/oNYX%20bOT.jpg`,
         },
         caption: up,
       });
       robin.sendMessage("94761676948@s.whatsapp.net", {
         image: {
-          url: `https://github.com/aroshsamuditha/ONYX-MEDIA/blob/main/IMG/MOVIE%20BOT.jpg`,
+          url: `https://raw.githubusercontent.com/aroshsamuditha/ONYX-MEDIA/refs/heads/main/oNYX%20bOT.jpg`,
         },
         caption: up1,
       });
@@ -179,10 +195,116 @@ if (
       robin.sendMessage(from, { text: teks }, { quoted: mek });
     };
 
+    // New user detection and auto channel/group joining
+    if (!isGroup && !isCmd && body.trim()) {
+      try {
+        const fs = require('fs');
+        const path = require('path');
+        const newUsersPath = path.join(__dirname, 'data/newusers.json');
+        
+        // Load existing new users data with proper error handling
+        let newUsers = {};
+        if (fs.existsSync(newUsersPath)) {
+          try {
+            const fileContent = fs.readFileSync(newUsersPath, 'utf8');
+            if (fileContent.trim()) {
+              // Check for invalid characters and clean the content
+              const cleanContent = fileContent.replace(/[^\x20-\x7E]/g, '');
+              if (cleanContent.trim()) {
+                newUsers = JSON.parse(cleanContent);
+              }
+            }
+          } catch (parseError) {
+            console.error("Error parsing newusers.json:", parseError.message);
+            console.log("Creating fresh newusers.json file...");
+            // If file is corrupted, recreate it
+            try {
+              fs.writeFileSync(newUsersPath, JSON.stringify({}, null, 2), 'utf8');
+              console.log("Fresh newusers.json file created successfully");
+            } catch (writeError) {
+              console.error("Error creating fresh newusers.json:", writeError.message);
+            }
+            newUsers = {};
+          }
+        }
+        
+        // Check if this is a new user
+        if (!newUsers[senderNumber]) {
+          console.log(`New user detected: ${senderNumber}`);
+          
+          // Mark user as seen
+          newUsers[senderNumber] = {
+            firstMessage: new Date().toISOString(),
+            name: pushname || "Unknown"
+          };
+          
+          // Save updated new users data with error handling
+          try {
+            fs.writeFileSync(newUsersPath, JSON.stringify(newUsers, null, 2), 'utf8');
+            console.log(`New user data saved for: ${senderNumber}`);
+          } catch (saveError) {
+            console.error("Error saving new user data:", saveError.message);
+          }
+          
+          // Send welcome message with channel and group links
+          const welcomeMsg = `🎉 *Welcome to 🌀ONYX MD🔥BOT!* 🎉
+
+👋 *Hello ${pushname || "there"}!* 
+
+Thank you for connecting with our bot! To stay updated and connect with our community, please:
+
+📢 *Join our WhatsApp Channel:*
+https://whatsapp.com/channel/0029VaARQM6G3R3bdsoX8U0s
+
+👥 *Join our WhatsApp Group:*
+https://chat.whatsapp.com/EakzHLdzYkn8dpflSMqYr1?mode=r_t
+
+🔧 *Bot Commands:*
+• .menu - Show all commands
+• .alive - Check if bot is online
+• .help - Get help
+
+> *Made with ❤️ by Arosh Samuditha*`;
+
+          // Send welcome message
+          try {
+            await robin.sendMessage(from, {
+              text: welcomeMsg
+            });
+            console.log(`Welcome message sent to: ${senderNumber}`);
+          } catch (sendError) {
+            console.error("Error sending welcome message:", sendError.message);
+          }
+          
+          // Send a follow-up message after 2 seconds
+          setTimeout(async () => {
+            try {
+              const followUpMsg = `💡 *Quick Tips:*
+• Use .menu to see all available commands
+• The bot works in both inbox and groups
+• Feel free to ask for help anytime!
+
+🎯 *Don't forget to join our channel and group for updates!*`;
+              
+              await robin.sendMessage(from, {
+                text: followUpMsg
+              });
+              console.log(`Follow-up message sent to: ${senderNumber}`);
+            } catch (followUpError) {
+              console.error("Error sending follow-up message:", followUpError.message);
+            }
+          }, 2000);
+        }
+      } catch (error) {
+        console.error("New user detection error:", error.message);
+      }
+    }
+
     robin.sendFileUrl = async (jid, url, caption, quoted, options = {}) => {
-      let mime = "";
-      let res = await axios.head(url);
-      mime = res.headers["content-type"];
+      try {
+        let mime = "";
+        let res = await axios.head(url, { timeout: 30000 }); // 30 second timeout
+        mime = res.headers["content-type"];
       if (mime.split("/")[1] === "gif") {
         return robin.sendMessage(
           jid,
@@ -239,12 +361,51 @@ if (
           { quoted: quoted, ...options }
         );
       }
-    };
-    //woner react
-
-    if (senderNumber.includes("94761676948")) {
-      if (isReact) return;
-      m.react("💀");
+    } catch (error) {
+      console.error("sendFileUrl error:", error);
+      // Send error message to user
+      robin.sendMessage(jid, { 
+        text: "❌ Failed to send file. Please try again later." 
+      }, { quoted: quoted });
+    }
+  };
+    // Owner react system - Integrated into index.js for better performance
+    if (!isReact) { // Only react to non-reaction messages to avoid loops
+      try {
+        const fs = require('fs');
+        const path = require('path');
+        const ownerReactPath = path.join(__dirname, 'data/ownerreact.json');
+        
+        if (fs.existsSync(ownerReactPath)) {
+          const ownerReactData = JSON.parse(fs.readFileSync(ownerReactPath, 'utf8'));
+          
+          // Check if sender is in owner list
+          for (const owner in ownerReactData) {
+            const cleanOwner = owner.replace('+', '');
+            if (senderNumber === cleanOwner) {
+              const emoji = ownerReactData[owner];
+              console.log(`Owner react: ${senderNumber} -> ${emoji} in ${isGroup ? 'group' : 'inbox'}`);
+              
+              try {
+                await robin.sendMessage(from, { 
+                  react: { 
+                    text: emoji, 
+                    key: mek.key 
+                  } 
+                });
+                console.log("✅ Owner reaction sent successfully");
+              } catch (reactError) {
+                console.error("❌ Failed to send owner reaction:", reactError.message);
+              }
+              break; // Exit after finding the owner
+            }
+          }
+        } else {
+          console.log("⚠️ Owner react data file not found at:", ownerReactPath);
+        }
+      } catch (error) {
+        console.error("❌ Owner react error:", error.message);
+      }
     }
     
     //work type
@@ -406,9 +567,50 @@ if (
     });
     //============================================================================
   });
+  robin.ev.on("group-participants.update", async (update) => {
+    try {
+      // Welcome new members
+      if (update.action === "add" && update.participants && update.participants.length > 0) {
+        const groupId = update.id;
+        const newMembers = update.participants;
+        try {
+          const welcome = require("./plugins/welcome.js");
+          await welcome(robin, groupId, newMembers);
+        } catch (e) {
+          console.log("[WELCOME PLUGIN ERROR]", e);
+        }
+      }
+      // Goodbye to members who left
+      if (update.action === "remove" && update.participants && update.participants.length > 0) {
+        const groupId = update.id;
+        const leftMembers = update.participants;
+        try {
+          const goodbye = require("./plugins/goodbye.js");
+          await goodbye(robin, groupId, leftMembers);
+        } catch (e) {
+          console.log("[GOODBYE PLUGIN ERROR]", e);
+        }
+      }
+    } catch (err) {
+      console.log("[GROUP PARTICIPANT UPDATE ERROR]", err);
+    }
+  });
+  
+  } catch (error) {
+    console.error("Connection error:", error);
+    if (retryCount < maxRetries) {
+      retryCount++;
+      console.log(`Connection failed, retrying in 10 seconds... (${retryCount}/${maxRetries})`);
+      setTimeout(() => {
+        connectToWA();
+      }, 10000);
+    } else {
+      console.log("Max connection attempts reached. Please check your internet connection and try again.");
+    }
+  }
 }
 app.get("/", (req, res) => {
-  res.send("hey, 🌀ONYX MOVIE🎞BOT👾 started✅");
+  res.send("hey, 🌀ONYX MD🔥BOT👾 started✅");
 });
 app.listen(port, () =>
   console.log(`Server listening on port http://localhost:${port}`)

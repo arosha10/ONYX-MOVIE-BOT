@@ -74,11 +74,26 @@ cmd(
     ▫️.owner
 *|🎞MOVIE DOWNLOAD🎞|*
     ▫️.movie <text>
-    ▫️.film <text>
+    ▫️.moviepick <number>
 *|🤴🏻OWNER COMMANDS🤴🏻|*
     ▫️.restart
     ▫️.update
     ▫️.owner
+
+*ඔයා Movie Bot ට අලුත් කෙනෙක්ද?*
+
+මෙන්න මේ විදිහට තමා Movie Download කරගන්නෙ 👇
+
+1️⃣ ඔයාට ඕන කරන movie එකේ නම *.movie movie එකේ නම* මේ විදිහට type කරන්න.
+
+*උදාහරණ = .movie harry potter*
+
+එතකොට ඔයාට titles එක්ක massage එකක් එයි
+
+2️⃣ දැන් ඔයාට ගන්න ඔන movie එකේ title එක ඉස්සරහ තියන අංකය .moviepick <number> මේ විදිහට type කරල send කරන්න
+*උදාහරණ = .movie 1*
+
+🌟දැන් විනාඩියක් වගේ ඇතුලත ඔයාගෙ movie එක Download වෙයි✅⚡"
 
 > *🌀ONYX MOVIE🎞BOT👾*
 `;
