@@ -74,7 +74,7 @@ cmd(
     ▫️.owner
 *|🎞MOVIE DOWNLOAD🎞|*
     ▫️.movie <text>
-    ▫️.film <text>
+    ▫️.moviepick <number>
 *|🤴🏻OWNER COMMANDS🤴🏻|*
     ▫️.restart
     ▫️.update
